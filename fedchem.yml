@@ -1,0 +1,238 @@
+program: main_fedavg.py
+method: grid
+metric:
+  goal: maximize
+  name: Test
+parameters:
+  fedmid:
+    values: ['oursvatAdaptive']
+  dataset:
+    values: ["qm9"]
+  part_alpha:
+    values: [0.1, 0.5, 1]
+  weightFed:
+    values: [1]
+  tmpFed:
+    values: [0.1, 0.5, 1]
+  comm_round:
+    values: [15, 30, 50]
+  weightVat:
+    values: [1]
+  ita:
+    values: [0.2]
+
+
+
+#program: main_fedavg.py
+#method: grid
+#metric:
+#  goal: maximize
+#  name: Test
+#parameters:
+#  fedmid:
+#    values: ['oursvatAdaptive']
+#  dataset:
+#    values: ["BBBP","ClinTox","SIDER", "Tox21"]
+#  part_alpha:
+#    values: [0.1, 0.5, 1]
+#  weightFed:
+#    values: [1]
+#  tmpFed:
+#    values: [0.1, 0.5, 1, 2, 5]
+#  comm_round:
+#    values: [15, 30, 50]
+#  weightVat:
+#    values: [0.1, 0.5, 1, 10]
+
+
+program: main_fedavg.py
+method: grid
+metric:
+  goal: maximize
+  name: Test
+parameters:
+  fedmid:
+    values: ['avg']
+  dataset:
+    values: ["qm9"]
+  part_alpha:
+    values: [0.1, 0.5, 1]
+  weightFed:
+    values: [1]
+  tmpFed:
+    values: [1]
+  comm_round:
+    values: [15, 30, 50]
+  weightVat:
+    values: [1]
+
+
+program: main_fedavg.py
+method: grid
+metric:
+  goal: maximize
+  name: Test
+parameters:
+  fedmid:
+    values: ['oursAdaptivefocal']
+  dataset:
+    values: ["esol","lipo","freesolve","BACE","BBBP","ClinTox","SIDER", "Tox21"]
+  part_alpha:
+    values: [0.1, 0.5, 1]
+  weightFed:
+    values: [1]
+  tmpFed:
+    values: [0.1, 0.5, 1, 2, 5]
+  comm_round:
+    values: [30]
+  weightVat:
+    values: [1]
+  ita:
+    values: [1]
+  normalizeFocalWeight:
+    values: [True, False]
+
+program: main_fedavg.py
+method: grid
+metric:
+  goal: maximize
+  name: Test
+parameters:
+  fedmid:
+    values: ['oursvatFLITPLUS']
+  dataset:
+    values: ["esol","lipo","freesolve","BACE","BBBP","ClinTox","SIDER", "Tox21"]
+  part_alpha:
+    values: [0.1, 0.5, 1]
+  weightFed:
+    values: [1]
+  tmpFed:
+    values: [0.1, 0.5, 1, 2, 5]
+  comm_round:
+    values: [30]
+  weightVat:
+    values: [1]
+  ita:
+    values: [1]
+  normalizeFocalWeight:
+    values: [True]
+
+#    'oursNormalizeFocal'
+oursAdaptivefocal
+
+
+
+program: main_fedavg.py
+method: grid
+metric:
+  goal: maximize
+  name: Test
+parameters:
+  fedmid:
+    values: ['vat']
+  dataset:
+    values: ["esol","lipo","freesolve","BACE","BBBP","ClinTox","SIDER", "Tox21"]
+  part_alpha:
+    values: [0.1, 0.5, 1, 2, 5]
+  weightFed:
+    values: [1]
+  tmpFed:
+    values: [1]
+  comm_round:
+    values: [15, 30, 50]
+  weightVat:
+    values: [0.1, 1, 10]
+  ita:
+    values: [0.2]
+
+program: main_fedavg.py
+method: grid
+metric:
+  goal: maximize
+  name: Test
+parameters:
+  fedmid:
+    values: ['prox']
+  dataset:
+    values: ["esol","lipo","freesolve","BACE","BBBP","ClinTox","SIDER", "Tox21"]
+  part_alpha:
+    values: [0.5]
+  weightFed:
+    values: [0.001,0.01, 0.1]
+  tmpFed:
+    values: [1]
+  comm_round:
+    values: [30]
+  weightVat:
+    values: [1]
+  numClient:
+    values: [4,5, 6,7,8]
+
+oursvatFLITPLUS
+oursFLIT
+program: main_fedavg.py
+method: grid
+metric:
+  goal: maximize
+  name: Test
+parameters:
+  fedmid:
+    values: ['oursFLIT']
+  dataset:
+    values: ["esol","lipo","BACE","BBBP","ClinTox","SIDER", "Tox21"]
+  part_alpha:
+    values: [0.5]
+  weightFed:
+    values: [1]
+  tmpFed:
+    values: [0.1, 0.5, 1, 2, 5]
+  comm_round:
+    values: [30]
+  weightVat:
+    values: [1]
+  numClient:
+    values: [4,5, 6,7,8]
+
+
+#program: main_fedavg.py
+#method: grid
+#metric:
+#  goal: maximize
+#  name: Test
+#parameters:
+#  fedmid:
+#    values: ['avg']
+#  dataset:
+#    values: ["esol","lipo","freesolve","BACE","BBBP","ClinTox","SIDER", "Tox21"]
+#  part_alpha:
+#    values: [1]
+#  weightFed:
+#    values: [1]
+#  tmpFed:
+#    values: [0.5]
+#  comm_round:
+#    values: [15]
+#  weightVat:
+#    values: [1]
+
+
+#program: main_fedavg.py
+#method: grid
+#metric:
+#  goal: maximize
+#  name: Test
+#parameters:
+#  fedmid:
+#    values: ['focal']
+#  dataset:
+#    values: ["esol","lipo","freesolve","BACE","BBBP","ClinTox","SIDER", "Tox21"]
+#  part_alpha:
+#    values: [1]
+#  weightFed:
+#    values: [1]
+#  tmpFed:
+#    values: [0.5, 1, 2, 5]
+#  comm_round:
+#    values: [15]
+#  weightVat:
+#    values: [1]

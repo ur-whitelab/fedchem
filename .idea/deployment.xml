@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="weizhu@paii.md@10.1.10.74:15654 password" showAutoUploadSettingsWarning="false">
+    <serverData>
+      <paths name="weizhu@paii.md@10.1.10.74:15654 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/weizhu@paii.md/LiverUS/Projects/WeiZhu_2021/project/fedml_chem" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="wzhu15@node2x18b:22 key">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/localdisk2/wzhu15/FedML_Chem" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
