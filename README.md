@@ -35,9 +35,4 @@ You may select datasets by changing dataset from [esol, lipo, freesolve, BACE, B
 Tune $\gamma$ by changing tmpFed for FLIT and FLIT+
 
 Tune $\alpha$ by changing ita for FLIT+
-# fedchem
-# fedchem
-# fedchem
-# fedchem
-# fedchem
-# fedchem
+
