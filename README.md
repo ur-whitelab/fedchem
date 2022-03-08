@@ -21,11 +21,11 @@ python downloadDataset.py
 You need a gpu to run the code. We log the results with wandb.
 1. Train FedAvg for FreeSolv with heterogeneous partatition 0.1 by 
 ```
-python main_flit.py -dataset esol -fedmid avg -part_alpha 0.1
+python main.py -dataset esol -fedmid avg -part_alpha 0.1
 ```
-2. Train FLIT+ (\gamma(tmpFed)=0.5 and \lambda(lambdavat)=0.01) for FreeSolv with heterogeneous partatition 0.1 by
+2. Train FLIT+ (gamma(tmpFed)=0.5 and lambda(lambdavat)=0.01) for FreeSolv with heterogeneous partatition 0.1 by
 ```
-python main_flit.py -dataset esol -fedmid oursvatFLITPLUS -tmpFed 0.5 -lambdavat 0.01 -part_alpha 0.1
+python main.py -dataset esol -fedmid oursvatFLITPLUS -tmpFed 0.5 -lambdavat 0.01 -part_alpha 0.1
 ```
 
 ## Citation
