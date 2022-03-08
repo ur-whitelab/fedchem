@@ -23,7 +23,7 @@ def _l2_normalize(d):
 
 class VATLoss(nn.Module):
 
-    def __init__(self, framework='dgl', criterion=None, xi=1e-4, eps=2.5, ip=1):
+    def __init__(self, framework='dgl', criterion=None, xi=1e-3, eps=2.5, ip=1):
         """VAT loss
         :param xi: hyperparameter of VAT (default: 10.0)
         :param eps: hyperparameter of VAT (default: 1.0)
@@ -43,7 +43,8 @@ class VATLoss(nn.Module):
             edgefea = x[2]
 
             with torch.no_grad():
-                pred, _ = model(bg, nodefea, edgefea)
+                nodefea, edgefea = model.forwardProjector(nodefea, edgefea)
+                pred, _ = model.forwardgnn(bg, nodefea, edgefea)
 
             # prepare random unit tensor
             dn = torch.rand(nodefea.shape).sub(0.5).to(nodefea.device)
@@ -56,11 +57,9 @@ class VATLoss(nn.Module):
                 for _ in range(self.ip):
                     dn.requires_grad_()
                     de.requires_grad_()
-                    pred_hat, _ = model(bg, nodefea + self.xi * dn, edgefea + self.xi * de)
+                    pred_hat, _ = model.forwardgnn(bg, nodefea + self.xi * dn, edgefea + self.xi * de)
                     adv_distance = self.criterion(pred_hat, pred)
                     adv_distance = adv_distance.mean()
-                    # logp_hat = F.log_softmax(pred_hat, dim=1)
-                    # adv_distance = F.kl_div(logp_hat, pred, reduction='batchmean')
                     adv_distance.backward()
                     dn = _l2_normalize(dn.grad)
                     de = _l2_normalize(de.grad)
@@ -69,7 +68,7 @@ class VATLoss(nn.Module):
                 # calc LDS
                 rn_adv = dn * self.eps
                 re_adv = de * self.eps
-                pred_hat,_ = model(bg, nodefea + rn_adv, edgefea + re_adv)
+                pred_hat, _ = model.forwardgnn(bg, nodefea + rn_adv, edgefea + re_adv)
                 lds = self.criterion(pred_hat, pred)
         else:
             if self.framework == 'geometric':

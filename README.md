@@ -1,38 +1,40 @@
 # FedChem and FLIT(+)
-We provide the script for running FLIT on the proposed benchmark. Our code is developed based on [FedML](https://fedml.ai/).
+We provide the script for running FLIT for the proposed benchmark. Our code is developed based on FedML (https://fedml.ai/)
+
+We provide the scaffold splitting results for all datasets and name them as scffoldLabel_dataset.pt
 
 ## Requirements
-    pytorch==1.7.0
     dgl==0.6.1
     dgllife==0.2.6
     easydict==1.9
     pytorch-geometric==1.7.2
     rdkit=2019.09.3
+    pytorch=1.8.1
+
+## Dataset Download (optional)
+All dataset will be downloaded with first run or you can download them by
+```angular2html
+python downloadDataset.py
+```
 
 ## Usage
-You need a gpu card to run the code. All required datasets will be downloaded with the first running.
+You need a gpu to run the code. We log the results with wandb.
+1. Train FedAvg for FreeSolv with heterogeneous partatition 0.1 by 
+```
+python main_flit.py -dataset esol -fedmid avg -part_alpha 0.1
+```
+2. Train FLIT+ (\gamma(tmpFed)=0.5 and \lambda(lambdavat)=0.01) for FreeSolv with heterogeneous partatition 0.1 by
+```
+python main_flit.py -dataset esol -fedmid oursvatFLITPLUS -tmpFed 0.5 -lambdavat 0.01 -part_alpha 0.1
+```
 
-1. (optional) We provide the scaffold splitting results for all datasets and name them as scffoldLabel_dataset.pt. You can generate the scaffold label by running
-    ```
-    python generateScaffoldLabel.py --dataset BBBP
-    ``` 
-2. Train FedAvg for BBBP by 
-    ```
-    python main.py --dataset BBBP --fedmid avg --numClient 4 --part_alpha 1
-    ```
-3. Train FLIT for BBBP by
-    ```
-    python main.py --dataset BBBP --fedmid oursFLIT --numClient 4 --part_alpha 1
-    ```
-4. Train FLIT+ for BBBP by 
-    ```
-    python main.py --dataset BBBP --fedmid oursFLITvatPLUS --numClient 4 --part_alpha 1
-    ```
-You need to edit the hyperparameter_defaults to run other settings.
-
-You may select datasets by changing dataset from [esol, lipo, freesolve, BACE, BBBP, ClinTox, SIDER, Tox21, qm9]
-
-Tune $\gamma$ by changing tmpFed for FLIT and FLIT+
-
-Tune $\alpha$ by changing ita for FLIT+
-
+## Citation
+Cite our paper
+```angular2html
+@article{zhu2021federated,
+  title={Federated Learning of Molecular Properties with Graph Neural Networks in a Heterogeneous Setting},
+  author={Zhu, Wei and White, Andrew and Luo, Jiebo},
+  journal={Available at SSRN 4002763},
+  year={2021}
+}
+```

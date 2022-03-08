@@ -31,7 +31,7 @@ class FedAvgAPI(object):
         self.test_data_local_dict = test_data_local_dict
 
         self.model_trainer = model_trainer
-        self._instanciate_opt()
+        # self._instanciate_opt()
         self._setup_clients(train_data_local_num_dict, train_data_local_dict, test_data_local_dict, model_trainer)
         if self.args.dataset in ['MUV', 'BACE', 'BBBP', 'ClinTox', 'SIDER',
                                  'ToxCast', 'HIV', 'PCBA', 'Tox21']:
@@ -204,7 +204,7 @@ class FedAvgAPI(object):
                     # mae = (pred.view(-1) - y[:, self.args.target]).abs()
                     predList.append(pred.squeeze())
                     labelList.append(y.squeeze())
-                elif self.args.dataset in ['esol', 'lipo', 'freesolve']:
+                elif self.args.dataset in ['esol', 'lipo', 'freesolv']:
                     smiles, bg, labels, masks = data
                     labels, masks = labels.to(device), masks.to(device)
                     # prediction = predict(args, model, bg)
@@ -255,7 +255,7 @@ class FedAvgAPI(object):
                 testResultStd = maeAll[valSize:].std().item()
                 resultsNoMean = (predAll - labelAll).abs().mean(dim=0)
                 metricName = ' mae '
-            elif self.args.dataset in ['esol', 'lipo', 'freesolve']:
+            elif self.args.dataset in ['esol', 'lipo', 'freesolv']:
                 predAll=predAll.flatten()
                 labelAll=labelAll.flatten()
                 mseAll = (predAll - labelAll)**2
