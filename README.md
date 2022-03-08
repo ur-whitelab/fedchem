@@ -1,7 +1,6 @@
 # FedChem and FLIT(+)
 We provide the script for running FLIT for the proposed benchmark. Our code is developed based on FedML (https://fedml.ai/)
 
-We provide the scaffold splitting results for all datasets and name them as scffoldLabel_dataset.pt
 
 ## Requirements
     dgl==0.6.1
@@ -16,6 +15,7 @@ All dataset will be downloaded with first run or you can download them by
 ```angular2html
 python downloadDataset.py
 ```
+We provide the scaffold splitting results for all datasets and save them at ./data/scaffoldresult/scffoldLabel_xxx.pt
 
 ## Usage
 You need a gpu to run the code. We log the results with wandb.
