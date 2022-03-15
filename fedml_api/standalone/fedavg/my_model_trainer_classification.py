@@ -138,42 +138,6 @@ class MyModelTrainer(ModelTrainer):
                         if fedmid == 'avg':
                             loss = lossCriterion(pred, labels)
                             loss = loss.mean()
-                        elif fedmid == 'moon':
-                            loss = 0
-                            sign = True
-                            if hasattr(self, 'embedding'):
-                                sign = False
-                                if clientidx in self.embedding:
-                                    emb_previous = self.embedding[clientidx][1][index].detach()
-                                    emb_previous = F.normalize(emb_previous, dim=1)
-                                    emb_global = predGAll_emb[index].detach()
-                                    emb_global = F.normalize(emb_global, dim=1)
-                                    emb_local = F.normalize(latentEmb, dim=1)
-                                    sim_lg = torch.exp(2 * (emb_local * emb_global).sum(dim=1))
-                                    sim_lp = torch.exp(2 * (emb_local * emb_previous).sum(dim=1))
-                                    loss += -weightReg * torch.log(sim_lg / (sim_lp + sim_lg + 1e-7) + 1e-7).mean()
-                                loss_base = lossCriterion(pred, labels)
-                                loss += loss_base.mean()
-                            if sign:
-                                loss_base = lossCriterion(pred, labels)
-                                loss = loss + loss_base.mean()
-                        elif fedmid == 'prox':
-                            loss = lossCriterion(pred, labels)
-                            loss = loss.mean()
-                            loss_regulize = 0
-                            params1 = model.named_parameters()
-                            params2 = globalModel.named_parameters()
-                            dict_params2 = dict(params2)
-                            for name1, param1 in params1:
-                                if name1 in dict_params2:
-                                    loss_regulize = loss_regulize + torch.sum((param1 - dict_params2[
-                                        name1].detach()) ** 2)
-                            loss = loss + loss_regulize * weightReg
-
-                        elif fedmid == 'vat':
-                            lossLocalLabel = lossCriterion(pred, labels)
-                            lossLocalVAT = localVATLoss
-                            loss = lossLocalLabel.mean() + weightReg * lossLocalVAT.mean()
 
                         elif fedmid == 'oursvatFLITPLUS':
                             lossGlobalLabel = lossCriterion(predG, labels)
@@ -212,7 +176,7 @@ class MyModelTrainer(ModelTrainer):
                             loss = loss.mean()
                         else:
                             print(fedmid)
-                            raise ValueError('no fed method')
+                            raise ValueError('not found fed method')
                     loss.backward()
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
                     optimizer.step()
