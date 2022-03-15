@@ -93,9 +93,7 @@ if __name__ == "__main__":
     device = torch.device("cuda:" + str(0) if torch.cuda.is_available() else "cpu")
 
     if argsinput.dataset == 'qm9':
-        totalsteps = 1000000
-        args.client_num_in_total = 1
-        args.client_num_per_round = 1
+        totalsteps = 100000
 
     args.comm_round = argsinput.comm_round
     args.localStepsPerRound = int(totalsteps/args.comm_round)
